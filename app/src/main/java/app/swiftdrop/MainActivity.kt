@@ -10,6 +10,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.swiftdrop.core.Transfers
@@ -20,30 +21,23 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        var startError: String? = null
-        try {
+        val startError: String? = runCatching {
             Transfers.init(applicationContext)
-        } catch (e: Throwable) {
-            startError = e.stackTraceToString()
-        }
+        }.exceptionOrNull()?.stackTraceToString()
 
         setContent {
             SwiftDropTheme {
                 if (startError != null) {
                     ErrorScreen(startError)
                 } else {
-                    try {
-                        SwiftDropApp()
-                    } catch (e: Throwable) {
-                        ErrorScreen(e.stackTraceToString())
-                    }
+                    SwiftDropApp()
                 }
             }
         }
     }
 }
 
-@androidx.compose.runtime.Composable
+@Composable
 private fun ErrorScreen(message: String) {
     Column(
         Modifier
