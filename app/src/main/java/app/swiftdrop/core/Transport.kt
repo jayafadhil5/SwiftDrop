@@ -6,7 +6,7 @@ import android.net.nsd.NsdServiceInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.awaitClose
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.withContext
 import java.net.Inet4Address
 import java.net.InetAddress
