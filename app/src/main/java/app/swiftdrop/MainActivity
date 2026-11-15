@@ -1,0 +1,18 @@
+package app.swiftdrop
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import app.swiftdrop.core.Transfers
+import app.swiftdrop.ui.SwiftDropApp
+import app.swiftdrop.ui.SwiftDropTheme
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Transfers.init(applicationContext)
+        setContent {
+            SwiftDropTheme { SwiftDropApp() }
+        }
+    }
+}
